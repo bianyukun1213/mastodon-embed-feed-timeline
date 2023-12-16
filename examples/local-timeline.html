@@ -31,13 +31,19 @@
 
   <body>
     <div class="dummy-wrapper">
-      <div class="mt-container">
+      <div
+        id="mt-embed-timeline"
+        class="mt-container"
+        data-instance-url="https://mastdn.social"
+        data-timeline-type="local"
+
+      >
         <div id="mt-body" class="mt-body" role="feed">
           <div class="loading-spinner"></div>
         </div>
       </div>
     </div>
 
-    <script src="js/mastodon-timeline.js"></script>
+    <script type="module" src="js/mastodon-timeline.js"></script>
   </body>
 </html>

@@ -1,111 +1,72 @@
 /**
- * Mastodon embed feed timeline v3.12.0
+ * Mastodon embed feed timeline v4.0.0
  * More info at:
  * https://gitlab.com/idotj/mastodon-embed-feed-timeline
  */
+
+import { mtTimelineSettings } from "./mastodon-timeline-settings.js";
 
 /**
  * Timeline settings
  * Adjust these parameters to customize your timeline
  */
 window.addEventListener("load", () => {
-  const mastodonTimeline = new MastodonApi({
-    // Id of the <div> containing the timeline
-    container_body_id: "mt-body",
-
-    // Class name for the loading spinner (also used in CSS file)
-    spinner_class: "loading-spinner",
-
-    // Preferred color theme: 'light', 'dark' or 'auto'. Default: auto
-    default_theme: "auto",
-
-    // Your Mastodon instance
-    instance_url: "https://mastdn.social",
-
-    // Choose type of toots to show in the timeline: 'local', 'profile', 'hashtag'. Default: local
-    timeline_type: "local",
-
-    // Your user ID number on Mastodon instance. Leave it empty if you didn't choose 'profile' as type of timeline
-    user_id: "",
-
-    // Your user name on Mastodon instance (including the @ symbol at the beginning). Leave it empty if you didn't choose 'profile' as type of timeline
-    profile_name: "",
-
-    // The name of the hashtag (not including the # symbol). Leave it empty if you didn't choose 'hashtag' as type of timeline
-    hashtag_name: "",
-
-    // Maximum amount of toots to get. Default: 20
-    toots_limit: "20",
-
-    // Hide unlisted toots. Default: don't hide
-    hide_unlisted: false,
-
-    // Hide boosted toots. Default: don't hide
-    hide_reblog: false,
-
-    // Hide replies toots. Default: don't hide
-    hide_replies: false,
-
-    // Hide preview card if toot contains a link, photo or video from a URL. Default: don't hide
-    hide_preview_link: false,
-
-    // Hide custom emojis available on the server. Default: don't hide
-    hide_emojos: false,
-
-    // Converts Markdown symbol ">" at the beginning of a paragraph into a blockquote HTML tag. Ddefault: don't apply
-    markdown_blockquote: false,
-
-    // Hide replies, boosts and favourites toots counter. Default: don't hide
-    hide_counter_bar: false,
-
-    // Limit the text content to a maximum number of lines. Default: 0 (unlimited)
-    text_max_lines: "0",
-
-    // Customize the text of the link pointing to the Mastodon page (appears after the last toot)
-    link_see_more: "See more posts at Mastodon",
-  });
+  const mastodonTimeline = new MastodonApi();
 });
 
 /**
  * Set all variables with customized values or use default ones
- * @param {object} params_ User customized values
  * Trigger main function to build the timeline
  */
-const MastodonApi = function (params_) {
-  this.CONTAINER_BODY_ID = params_.container_body_id || "mt-body";
-  this.SPINNER_CLASS = params_.spinner_class || "loading-spinner";
-  this.DEFAULT_THEME = params_.default_theme || "auto";
-  this.INSTANCE_URL = params_.instance_url;
-  this.USER_ID = params_.user_id || "";
-  this.PROFILE_NAME = this.USER_ID ? params_.profile_name : "";
-  this.TIMELINE_TYPE = params_.timeline_type || "local";
-  this.HASHTAG_NAME = params_.hashtag_name || "";
-  this.TOOTS_LIMIT = params_.toots_limit || "20";
+const MastodonApi = function () {
+
+  const mtEmbedTimeline = document.getElementById(mtTimelineSettings.container_id);
+
+  this.INSTANCE_URL = mtEmbedTimeline.dataset.instanceUrl;
+  this.TIMELINE_TYPE = mtEmbedTimeline.dataset.timelineType;
+  this.USER_ID = ""; // if wrong, show: alert('provide an user ID')
+  this.PROFILE_NAME = "";
+  this.HASHTAG_NAME = "";
+
+  this.CONTAINER_BODY_ID = mtTimelineSettings.container_body_id || "mt-body";
+  this.SPINNER_CLASS = mtTimelineSettings.spinner_class || "loading-spinner";
+  this.DEFAULT_THEME = mtTimelineSettings.default_theme || "auto";
+
+  this.TOOTS_LIMIT = mtTimelineSettings.toots_limit || "20";
   this.HIDE_UNLISTED =
-    typeof params_.hide_unlisted !== "undefined"
-      ? params_.hide_unlisted
+    typeof mtTimelineSettings.hide_unlisted !== "undefined"
+      ? mtTimelineSettings.hide_unlisted
       : false;
   this.HIDE_REBLOG =
-    typeof params_.hide_reblog !== "undefined" ? params_.hide_reblog : false;
+    typeof mtTimelineSettings.hide_reblog !== "undefined"
+      ? mtTimelineSettings.hide_reblog
+      : false;
   this.HIDE_REPLIES =
-    typeof params_.hide_replies !== "undefined" ? params_.hide_replies : false;
+    typeof mtTimelineSettings.hide_replies !== "undefined"
+      ? mtTimelineSettings.hide_replies
+      : false;
   this.HIDE_PREVIEW_LINK =
-    typeof params_.hide_preview_link !== "undefined"
-      ? params_.hide_preview_link
+    typeof mtTimelineSettings.hide_preview_link !== "undefined"
+      ? mtTimelineSettings.hide_preview_link
       : false;
   this.HIDE_EMOJOS =
-    typeof params_.hide_emojos !== "undefined" ? params_.hide_emojos : false;
+    typeof mtTimelineSettings.hide_emojos !== "undefined"
+      ? mtTimelineSettings.hide_emojos
+      : false;
   this.MARKDOWN_BLOCKQUOTE =
-    typeof params_.markdown_blockquote !== "undefined"
-      ? params_.markdown_blockquote
+    typeof mtTimelineSettings.markdown_blockquote !== "undefined"
+      ? mtTimelineSettings.markdown_blockquote
       : false;
   this.HIDE_COUNTER_BAR =
-    params_.hide_counter_bar !== "undefined" ? params_.hide_counter_bar : false;
-  this.TEXT_MAX_LINES = params_.text_max_lines || "0";
-  this.LINK_SEE_MORE = params_.link_see_more;
+    typeof mtTimelineSettings.hide_counter_bar !== "undefined"
+      ? mtTimelineSettings.hide_counter_bar
+      : false;
+  this.TEXT_MAX_LINES = mtTimelineSettings.text_max_lines || "0";
+  this.LINK_SEE_MORE =
+    mtTimelineSettings.link_see_more || "See more posts at Mastodon";
   this.FETCHED_DATA = {};
 
-  this.mtBodyContainer = document.getElementById(this.CONTAINER_BODY_ID);
+  this.mtBodyContainer = document.getElementById('mt-body');
 
   this.buildTimeline();
 };
