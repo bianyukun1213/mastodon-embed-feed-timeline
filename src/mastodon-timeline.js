@@ -4,67 +4,69 @@
  * https://gitlab.com/idotj/mastodon-embed-feed-timeline
  */
 
+// 交由 site-mod.js 管理。
 /**
  * Timeline settings
  * Adjust these parameters to customize your timeline
  */
-window.addEventListener("load", () => {
-  const mastodonTimeline = new MastodonApi({
-    // Id of the <div> containing the timeline
-    container_body_id: "mt-body",
+// window.addEventListener("load", () => {
+//   const mastodonTimeline = new MastodonApi({
+//     // Id of the <div> containing the timeline
+//     container_body_id: "mt-body",
 
-    // Class name for the loading spinner (also used in CSS file)
-    spinner_class: "loading-spinner",
+//     // Class name for the loading spinner (also used in CSS file)
+//     spinner_class: "loading-spinner",
 
-    // Preferred color theme: 'light', 'dark' or 'auto'. Default: auto
-    default_theme: "auto",
+//     // Preferred color theme: 'light', 'dark' or 'auto'. Default: auto
+//     // default_theme: "light",
+//     default_theme: "auto",
 
-    // Your Mastodon instance
-    instance_url: "https://mastdn.social",
+//     // Your Mastodon instance
+//     instance_url: "https://m.cmx.im",
 
-    // Choose type of toots to show in the timeline: 'local', 'profile', 'hashtag'. Default: local
-    timeline_type: "local",
+//     // Choose type of toots to show in the timeline: 'local', 'profile', 'hashtag'. Default: local
+//     timeline_type: "profile",
 
-    // Your user ID number on Mastodon instance. Leave it empty if you didn't choose 'profile' as type of timeline
-    user_id: "",
+//     // Your user ID number on Mastodon instance. Leave it empty if you didn't choose 'profile' as type of timeline
+//     user_id: "107989258291762102",
 
-    // Your user name on Mastodon instance (including the @ symbol at the beginning). Leave it empty if you didn't choose 'profile' as type of timeline
-    profile_name: "",
+//     // Your user name on Mastodon instance (including the @ symbol at the beginning). Leave it empty if you didn't choose 'profile' as type of timeline
+//     profile_name: "@Hollis",
 
-    // The name of the hashtag (not including the # symbol). Leave it empty if you didn't choose 'hashtag' as type of timeline
-    hashtag_name: "",
+//     // The name of the hashtag (not including the # symbol). Leave it empty if you didn't choose 'hashtag' as type of timeline
+//     hashtag_name: "",
 
-    // Maximum amount of toots to get. Default: 20
-    toots_limit: "20",
+//     // Maximum amount of toots to get. Default: 20
+//     toots_limit: "20",
 
-    // Hide unlisted toots. Default: don't hide
-    hide_unlisted: false,
+//     // Hide unlisted toots. Default: don't hide
+//     hide_unlisted: false,
 
-    // Hide boosted toots. Default: don't hide
-    hide_reblog: false,
+//     // Hide boosted toots. Default: don't hide
+//     hide_reblog: false,
 
-    // Hide replies toots. Default: don't hide
-    hide_replies: false,
+//     // Hide replies toots. Default: don't hide
+//     hide_replies: false,
 
-    // Hide preview card if toot contains a link, photo or video from a URL. Default: don't hide
-    hide_preview_link: false,
+//     // Hide preview card if toot contains a link, photo or video from a URL. Default: don't hide
+//     hide_preview_link: false,
 
-    // Hide custom emojis available on the server. Default: don't hide
-    hide_emojos: false,
+//     // Hide custom emojis available on the server. Default: don't hide
+//     hide_emojos: false,
 
-    // Converts Markdown symbol ">" at the beginning of a paragraph into a blockquote HTML tag. Ddefault: don't apply
-    markdown_blockquote: false,
+//     // Converts Markdown symbol ">" at the beginning of a paragraph into a blockquote HTML tag. Ddefault: don't apply
+//     markdown_blockquote: false,
 
-    // Hide replies, boosts and favourites toots counter. Default: don't hide
-    hide_counter_bar: false,
+//     // Hide replies, boosts and favourites toots counter. Default: don't hide
+//     hide_counter_bar: false,
 
-    // Limit the text content to a maximum number of lines. Default: 0 (unlimited)
-    text_max_lines: "0",
+//     // Limit the text content to a maximum number of lines. Default: 0 (unlimited)
+//     text_max_lines: "0",
 
-    // Customize the text of the link pointing to the Mastodon page (appears after the last toot)
-    link_see_more: "See more posts at Mastodon",
-  });
-});
+//     // Customize the text of the link pointing to the Mastodon page (appears after the last toot)
+//     link_see_more: "See more posts at Mastodon",
+//   });
+// });
 
 /**
  * Set all variables with customized values or use default ones
